@@ -47,5 +47,12 @@ saca try/Catch
       throw new AlmacenVacioException("El almacen esta vacio, no hay elementos a mostrar");
 
 
+-----------------------------------------------------------------------------------------------------------------------------
+Constructor de Python:
+Eliminar verifica_ancho y verifica_alto ya que se realiza en el setter de ambos atributos.
+
+
+
+
 
 

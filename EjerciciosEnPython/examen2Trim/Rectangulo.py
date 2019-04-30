@@ -12,10 +12,8 @@ class Rectangulo:
     el ancho y el alto. Se verifican que los parametros sean correctos para poder asignarlos.
     """
     def __init__(self,ancho,alto):
-        Rectangulo.__verifica_lado(ancho)
-        Rectangulo.__verifica_lado(alto)
-        self.__ancho = ancho
-        self.__alto = alto
+        self.ancho = ancho
+        self.alto = alto
     """
     Creacion de las propiedades del ancho del rectangulo, implementa el setter 
     y el getter de este atributo.En el setter comprueba que su valor este 

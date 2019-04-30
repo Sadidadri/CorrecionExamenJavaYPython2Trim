@@ -16,7 +16,6 @@ class Cuadrado(Rectangulo):
     """
     def __init__(self,l):
         super().__init__(l,l)
-        self.__lado = l
     """
     Creacion de las propiedades del lado del cuadrado, implementa el setter 
     y el getter de este atributo.En el setter comprueba que su valor este 
@@ -29,7 +28,6 @@ class Cuadrado(Rectangulo):
     @lado.setter
     def lado(self, l):
         Cuadrado.__verifica_lado(l)
-        self.__lado = l
         self.alto = l 
         self.ancho = l
     
