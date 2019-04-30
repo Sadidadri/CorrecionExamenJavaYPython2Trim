@@ -1,0 +1,12 @@
+He intentado generar la documentacion web con pydoc con el siguiente link de la moodle:
+
+https://moodle.iesgrancapitan.org/mod/url/view.php?id=8712
+que redirige a la siguiente pagina:
+http://edupython.blogspot.com/2013/12/documentando-programas-en-python.html
+
+El problema viene que cuando ejecuto el siguiente comando:
+	pydoc -w Rectangulo
+	pydoc -w Cuadrado
+en la carpeta donde se encuentran los ejercicios del examen, me sale el siguiente mensaje:
+
+"pydoc" no se reconoce como un comando interno o externo, programa o archivo por lotes ejecutable.

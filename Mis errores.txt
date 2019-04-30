@@ -1,0 +1,51 @@
+----------------------------------------------
+
+* @author d18momoa
+
+Adrián: 9
+
+----------------------------------------------
+
+listado extraño: 
+
+-11: Codigo: 2 | Precio Compra: 11.0â‚¬ | PVP: 11.0â‚¬ | Stock: 11 | Iva: GENERAL |
+
+-22: Codigo: 3 | Precio Compra: 22.0â‚¬ | PVP: 22.0â‚¬ | Stock: 22 | Iva: SUPERREDUCIDO |
+
+
+
+Duplicación de código en el main.
+
+saca try/Catch
+
+
+
+
+
+ private void setIva(Iva iva) throws IvaInvalidoException {
+
+    if (iva == null) {
+
+      throw new IvaInvalidoException("Error, el iva no puede ser null");
+
+    } else {//<-------------------SOBRA. TAMBIÉN LLAVES
+
+      this.iva = iva;
+
+    }
+
+
+
+  }
+
+
+
+//<-------------------DUPLICACIÓN DE CÓDIGO. LÁNZALA dentro de compruebaSiEstaVacio
+
+   if (almacen.compruebaSiEstaVacio()) {
+
+      throw new AlmacenVacioException("El almacen esta vacio, no hay elementos a mostrar");
+
+
+
+
