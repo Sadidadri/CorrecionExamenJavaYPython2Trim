@@ -1,10 +1,4 @@
 package almacen;
-
-import excepciones.IvaInvalidoException;
-import excepciones.MercanciaNegativaException;
-import excepciones.PNegativoException;
-import excepciones.StockNegativoException;
-
 /**
  * Programa que se encarga de crear los articulos y que luego seran registrados
  * dentro de la lista del almacen
@@ -23,7 +17,7 @@ public class Articulo {
   private Iva iva;
 
   // Constructor principal
-  Articulo(String descripcion, double precioCompra, double precioVenta, int stock, Iva iva)
+  public Articulo(String descripcion, double precioCompra, double precioVenta, int stock, Iva iva)
       throws PNegativoException, StockNegativoException, IvaInvalidoException {
     this.codigo = generarCodigo();
     this.descripcion = descripcion;
@@ -122,11 +116,10 @@ public class Articulo {
    * @throws PVentaNegativoException
    */
   private void setPrecioVenta(double pv) throws PNegativoException {
-    if (pv >= 0) {
-      this.precioVenta = pv;
-    } else {
+    if (pv < 0) {
       throw new PNegativoException("Error, el precio de venta no puede ser negativo");
-    }
+    } 
+    this.precioVenta = pv;
   }
 
   /**
@@ -136,11 +129,10 @@ public class Articulo {
    * @param pc
    */
   private void setPrecioCompra(double pc) throws PNegativoException {
-    if (pc >= 0) {
-      this.precioCompra = pc;
-    } else {
+    if (pc < 0) {
       throw new PNegativoException("Error, el precio de compra no puede ser negativo");
     }
+    this.precioCompra = pc;
   }
 
   /**
@@ -151,11 +143,10 @@ public class Articulo {
    * @throws StockNegativoException
    */
   private void setStock(int s) throws StockNegativoException {
-    if (s >= 0) {
-      this.stock = s;
-    } else {
+    if (s < 0) {
       throw new StockNegativoException("Error, el stock no puede ser inferior a 0");
     }
+    this.stock = s;
   }
 
   /**
@@ -179,10 +170,10 @@ public class Articulo {
    * @throws MercanciaNegativaException
    */
   public void saleMercancia(int cantidad) throws StockNegativoException, MercanciaNegativaException {
-    if (cantidad > 0)
-      setStock(getStock() - cantidad);
-    else
+    if (cantidad <= 0)
       throw new MercanciaNegativaException("Error, no puede salir mercancia negativa");
+    else
+    setStock(getStock() - cantidad);
   }
 
   @Override
@@ -233,6 +224,6 @@ public class Articulo {
    */
   public String toString() {
     return getDescripcion() + ": Codigo: " + getCodigo() + " | Precio Compra: " + getPrecioCompra() + " euro/s | PVP: "
-        + getPrecioVenta() + " euro/s | Stock: " + getStock() + " | Iva: "+getIva()+" |";
+        + getPrecioVenta() + " euro/s | Stock: " + getStock() + " | Iva: "+getIva()+" |\n";
   }
 }

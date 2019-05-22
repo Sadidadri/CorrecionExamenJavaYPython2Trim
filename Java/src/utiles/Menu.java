@@ -27,7 +27,7 @@ public class Menu {
     return numOpciones;
   }
 
-  public int gestionar() {
+  public int gestionar() throws NoEnteroException {
     mostrar();
     return recogerOpcion();
   }
@@ -59,7 +59,7 @@ public class Menu {
     return (opcion > 0 && opcion <= numOpciones);
   }
 
-  public int recogerOpcion() {
+  public int recogerOpcion() throws NoEnteroException {
     int opcion;
     do {
       opcion = Teclado.leerEntero("\nIntroduce una opcion valida");

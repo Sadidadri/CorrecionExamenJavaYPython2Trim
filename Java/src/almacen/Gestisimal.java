@@ -2,13 +2,6 @@ package almacen;
 
 import java.util.ArrayList;
 
-import excepciones.AlmacenVacioException;
-import excepciones.CodigoNoEncontradoException;
-import excepciones.IvaInvalidoException;
-import excepciones.MercanciaNegativaException;
-import excepciones.PNegativoException;
-import excepciones.StockNegativoException;
-
 /**
  * Programa que crea y controla la lista de articulos del almacen
  * 
@@ -17,20 +10,20 @@ import excepciones.StockNegativoException;
  */
 public class Gestisimal {
   // Creacion de la lista de articulos que alberga el almacen
-  private ArrayList<Articulo> lista = new ArrayList<Articulo>();
+  private ArrayList<Articulo> almacen = new ArrayList<Articulo>();
 
   /**
    * Agnade un articulo a la lista
    * 
    * @throws StockNegativoException
    * @throws PNegativoException
-   * @throws IvaInvalidoException 
+   * @throws IvaInvalidoException
    * @throws @throws
    *           arraylistObjetos.StockNegativoException
    */
-  void annadirNuevoArticulo(String descripcion, double pC, double pV, int stock,Iva iva)
+  public void annadirNuevoArticulo(String descripcion, double pC, double pV, int stock, Iva iva)
       throws PNegativoException, StockNegativoException, IvaInvalidoException {
-    lista.add(new Articulo(descripcion, pC, pV, stock,iva));
+    almacen.add(new Articulo(descripcion, pC, pV, stock, iva));
   }
 
   /**
@@ -39,10 +32,8 @@ public class Gestisimal {
    * @param codigo
    * @throws CodigoNoEncontradoException
    */
-  void borrarArticulo(int codigo) throws CodigoNoEncontradoException {
-    if (compruebaCodigo(codigo)) {
-      lista.remove(obtenerIndice(codigo));
-    }
+  public void borrarArticulo(int codigo) throws CodigoNoEncontradoException {
+    almacen.remove(new Articulo(codigo));
   }
 
   /**
@@ -56,12 +47,13 @@ public class Gestisimal {
    * @throws CodigoNoEncontradoException
    * @throws StockNegativoException
    * @throws PNegativoException
-   * @throws IvaInvalidoException 
+   * @throws IvaInvalidoException
    */
   public void modificar(Articulo articulo, String descripcionIntroducido, double precioCompraIntroducido,
-      double precioVentaIntroducido, int stockIntroducido,Iva ivaIntroducido)
+      double precioVentaIntroducido, int stockIntroducido, Iva ivaIntroducido)
       throws CodigoNoEncontradoException, StockNegativoException, PNegativoException, IvaInvalidoException {
-    articulo.modifica(descripcionIntroducido, precioCompraIntroducido, precioVentaIntroducido, stockIntroducido,ivaIntroducido);
+    articulo.modifica(descripcionIntroducido, precioCompraIntroducido, precioVentaIntroducido, stockIntroducido,
+        ivaIntroducido);
   }
 
   /**
@@ -69,16 +61,12 @@ public class Gestisimal {
    * 
    * @param codigo
    * @param cantidad
-   * @throws CodigoNoEncontradoException
    * @throws StockNegativoException
    * @throws MercanciaNegativaException
+   * @throws ArticuloNoExistenteException 
    */
-  void entraMercancia(int codigo, int cantidad)
-      throws CodigoNoEncontradoException, StockNegativoException, MercanciaNegativaException {
-    if (compruebaCodigo(codigo)) {
-      Articulo articulo = lista.get(obtenerIndice(codigo));
-      articulo.entraMercancia(cantidad);
-    }
+  public void entraMercancia(int codigo, int cantidad) throws StockNegativoException, MercanciaNegativaException, ArticuloNoExistenteException {
+    get(codigo).entraMercancia(cantidad);
   }
 
   /**
@@ -86,16 +74,12 @@ public class Gestisimal {
    * 
    * @param codigo
    * @param cantidad
-   * @throws CodigoNoEncontradoException
+   * @throws ArticuloNoExistenteException 
    * @throws StockNegativoException
    * @throws MercanciaNegativaException
    */
-  void saleMercancia(int codigo, int cantidad)
-      throws CodigoNoEncontradoException, StockNegativoException, MercanciaNegativaException {
-    if (compruebaCodigo(codigo)) {
-      Articulo articulo = lista.get(obtenerIndice(codigo));
-      articulo.saleMercancia(cantidad);
-    }
+  public void saleMercancia(int codigo, int cantidad) throws StockNegativoException, MercanciaNegativaException, ArticuloNoExistenteException{
+    get(codigo).saleMercancia(cantidad);
   }
 
   /**
@@ -103,70 +87,25 @@ public class Gestisimal {
    * 
    * @param codigoIntroducido
    * @return
+   * @throws ArticuloNoExistenteException 
    */
-  public Articulo get(int codigoIntroducido) {
-    Articulo articulo = lista.get(lista.indexOf(new Articulo(codigoIntroducido)));
-    return articulo;
-  }
-
-  /**
-   * Obtiene el indice del articulo cuyo codigo es introducido por parametro.
-   * 
-   * @param codigo
-   * @return
-   */
-  int obtenerIndice(int codigo) {
-    int indice = -1;
-    for (Articulo a : lista) {
-      if (a.getCodigo() == codigo) {
-        indice = lista.indexOf(a);
-      }
-    }
-    return indice;
-  }
-
-  /**
-   * Metodo que recibe un codigo por parametro y comprueba si esta en la lista de
-   * articulos.
-   * 
-   * @param code
-   * @return
-   * @throws CodigoNoEncontradoException
-   */
-  boolean compruebaCodigo(int code) throws CodigoNoEncontradoException {
-    boolean codigoEncontrado = false;
-    for (Articulo a : lista) {
-      if (a.getCodigo() == code) {
-        codigoEncontrado = true;
-      }
-    }
-    if (!codigoEncontrado) {
-      throw new CodigoNoEncontradoException("El codigo introducido no existe");
-    }
-    return codigoEncontrado;
-  }
-
-  /**
-   * Metodo que comprueba si la lista esta vacia
-   * 
-   * @return
-   * @throws AlmacenVacioException 
-   */
-  void compruebaSiEstaVacio() throws AlmacenVacioException {
-    if(lista.isEmpty()) {
-      throw new AlmacenVacioException("El almacen esta vacio, no hay elementos a mostrar");
+  public Articulo get(int codigoIntroducido) throws ArticuloNoExistenteException {
+    try {
+      return almacen.get(almacen.indexOf(new Articulo(codigoIntroducido)));
+    }catch(IndexOutOfBoundsException e) {
+      throw new ArticuloNoExistenteException("El articulo no existe.");
     }
   }
-
   /**
    * Muestra el contenido de la lista.
    */
   @Override
   public String toString() {
-    String cadena = "";
-    for (Articulo a : lista) {
-      cadena += "-" + a + "\n";
-    }
-    return cadena;
+    //String cadena = "";
+    //for (Articulo a : almacen) {
+    //  cadena += "-" + a + "\n";
+    //}
+    //return cadena;
+    return ""+almacen;
   }
 }

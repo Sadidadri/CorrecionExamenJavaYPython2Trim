@@ -68,13 +68,14 @@ public class Teclado {
    * 
    * 
    * @return entero introducido por el usuario
+   * @throws NoEnteroException 
    */
-  public static int leerEntero() {
+  public static int leerEntero() throws NoEnteroException {
     int x;
     try {
       x = Integer.parseInt(leerCadena().trim()); // Quita los espacios del int
-    } catch (Exception e) {
-      x = 0;
+    } catch (NumberFormatException e) {
+      throw new NoEnteroException("Introduzca un valor entero");
     }
     return x;
   }
@@ -85,8 +86,9 @@ public class Teclado {
    * @param msj
    *          mensaje mostrado al usuario
    * @return entero introducida por el usuario
+   * @throws NoEnteroException 
    */
-  public static int leerEntero(String msj) {
+  public static int leerEntero(String msj) throws NoEnteroException {
     System.out.println(msj);
     return leerEntero();
   }
@@ -95,8 +97,9 @@ public class Teclado {
    * Lee un decimal del teclado
    * 
    * @return decimal introducido por el usuario
+   * @throws NoDecimalException 
    */
-  public static double leerDecimal() {
+  public static double leerDecimal() throws NoDecimalException {
     double x;
     try {
       x = Double.parseDouble(leerCadena().trim()); // Quita los espacios
@@ -104,7 +107,7 @@ public class Teclado {
                                                    // convierte a
                                                    // double
     } catch (Exception e) {
-      x = 0;
+      throw new NoDecimalException("Introduzca un valor decimal.");
     }
     return x;
   }
@@ -115,8 +118,9 @@ public class Teclado {
    * @param msj
    *          mensaje mostrado al usuario
    * @return decimal introducida por el usuario
+   * @throws NoDecimalException 
    */
-  public static double leerDecimal(String msj) {
+  public static double leerDecimal(String msj) throws NoDecimalException {
     System.out.println(msj);
     return leerDecimal();
   }
