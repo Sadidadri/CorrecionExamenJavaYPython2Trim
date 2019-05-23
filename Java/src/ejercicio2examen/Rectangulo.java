@@ -37,7 +37,7 @@ public class Rectangulo{
    * entre 1 y 10, en caso contrario lanzara la excepcion ArithmeticException.
    * @param ancho
    */
-  private void setAncho(int ancho) {
+  protected void setAncho(int ancho) {
     if (ancho <= 0 || ancho > 10) {
       throw new ArithmeticException();
     } else {
@@ -56,7 +56,7 @@ public class Rectangulo{
   * entre 1 y 10, en caso contrario lanzara la excepcion ArithmeticException.
   * @param ancho
   */
-  private void setAlto(int alto) {
+  protected void setAlto(int alto) {
     if (alto <= 0 || alto > 10) {
       throw new ArithmeticException();
     } else {
