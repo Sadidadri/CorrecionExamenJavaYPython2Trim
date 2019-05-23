@@ -156,10 +156,10 @@ public class Articulo {
    * @throws MercanciaNegativaException
    */
   public void entraMercancia(int cantidad) throws StockNegativoException, MercanciaNegativaException {
-    if (cantidad > 0)
-      setStock(getStock() + cantidad);
-    else
+    if (cantidad <= 0){
       throw new MercanciaNegativaException("Error, no puedes agnadir un stock negativo");
+    }
+    setStock(getStock() + cantidad);
   }
 
   /**
@@ -170,9 +170,9 @@ public class Articulo {
    * @throws MercanciaNegativaException
    */
   public void saleMercancia(int cantidad) throws StockNegativoException, MercanciaNegativaException {
-    if (cantidad <= 0)
+    if (cantidad <= 0){
       throw new MercanciaNegativaException("Error, no puede salir mercancia negativa");
-    else
+    }
     setStock(getStock() - cantidad);
   }
 
