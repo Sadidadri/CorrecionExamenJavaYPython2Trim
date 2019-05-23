@@ -32,7 +32,7 @@ public class Gestisimal {
    * @param codigo
    * @throws CodigoNoEncontradoException
    */
-  public void borrarArticulo(int codigo) throws CodigoNoEncontradoException {
+  public void borrarArticulo(int codigo) {
     almacen.remove(new Articulo(codigo));
   }
 
@@ -51,7 +51,7 @@ public class Gestisimal {
    */
   public void modificar(Articulo articulo, String descripcionIntroducido, double precioCompraIntroducido,
       double precioVentaIntroducido, int stockIntroducido, Iva ivaIntroducido)
-      throws CodigoNoEncontradoException, StockNegativoException, PNegativoException, IvaInvalidoException {
+      throws StockNegativoException, PNegativoException, IvaInvalidoException {
     articulo.modifica(descripcionIntroducido, precioCompraIntroducido, precioVentaIntroducido, stockIntroducido,
         ivaIntroducido);
   }

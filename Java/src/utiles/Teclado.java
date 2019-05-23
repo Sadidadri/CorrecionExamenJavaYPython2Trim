@@ -70,14 +70,14 @@ public class Teclado {
    * @return entero introducido por el usuario
    * @throws NoEnteroException 
    */
-  public static int leerEntero() throws NoEnteroException {
-    int x;
+  public static int leerEntero(){
+    do {
     try {
-      x = Integer.parseInt(leerCadena().trim()); // Quita los espacios del int
+      return Integer.parseInt(leerCadena().trim()); // Quita los espacios del int
     } catch (NumberFormatException e) {
-      throw new NoEnteroException("Introduzca un valor entero");
+      System.err.println("Introduzca un valor entero:");
     }
-    return x;
+    }while(true); 
   }
 
   /**
@@ -86,9 +86,9 @@ public class Teclado {
    * @param msj
    *          mensaje mostrado al usuario
    * @return entero introducida por el usuario
-   * @throws NoEnteroException 
+   * @throws NoEnteroException
    */
-  public static int leerEntero(String msj) throws NoEnteroException {
+  public static int leerEntero(String msj) {
     System.out.println(msj);
     return leerEntero();
   }
@@ -97,20 +97,17 @@ public class Teclado {
    * Lee un decimal del teclado
    * 
    * @return decimal introducido por el usuario
-   * @throws NoDecimalException 
+   * @throws NoDecimalException
    */
-  public static double leerDecimal() throws NoDecimalException {
-    double x;
-    try {
-      x = Double.parseDouble(leerCadena().trim()); // Quita los espacios
-                                                   // del String y
-                                                   // convierte a
-                                                   // double
-    } catch (Exception e) {
-      throw new NoDecimalException("Introduzca un valor decimal.");
+  public static double leerDecimal(){
+    do {
+      try {
+        return Double.parseDouble(leerCadena().trim()); // Quita los espacios del int
+      } catch (NumberFormatException e) {
+        System.err.println("Introduzca un valor decimal:");
+      }
+      }while(true); 
     }
-    return x;
-  }
 
   /**
    * Lee una decimal del teclado
@@ -118,9 +115,9 @@ public class Teclado {
    * @param msj
    *          mensaje mostrado al usuario
    * @return decimal introducida por el usuario
-   * @throws NoDecimalException 
+   * @throws NoDecimalException
    */
-  public static double leerDecimal(String msj) throws NoDecimalException {
+  public static double leerDecimal(String msj){
     System.out.println(msj);
     return leerDecimal();
   }

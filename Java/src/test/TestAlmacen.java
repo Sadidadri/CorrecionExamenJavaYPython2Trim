@@ -7,7 +7,6 @@ import almacen.IvaInvalidoException;
 import almacen.MercanciaNegativaException;
 import almacen.PNegativoException;
 import almacen.StockNegativoException;
-import almacen.CodigoNoEncontradoException;
 import utiles.*;
 
 /**
@@ -71,11 +70,8 @@ public class TestAlmacen {
     int opcion = 0;
     Iva ivaElegido;
 
-    try {
-      opcion = menuIva.gestionar();
-    } catch (NoEnteroException e) {
-      System.err.println("Error en la introduccion del teclado.");
-    } 
+    opcion = menuIva.gestionar();
+
     // Pide al usuario introducir un numero para escoger la opcion
     switch (opcion) {
     case 1:
@@ -117,7 +113,7 @@ public class TestAlmacen {
       almacen.annadirNuevoArticulo(Teclado.leerCadena("Introduzca nombre del producto:"), Teclado.leerDecimal("Precio de Compra:")
           , Teclado.leerDecimal("Precio de Venta:"), Teclado.leerEntero("Stock"), elegirIva());
       System.out.println("##Articulo agnadido satisfactoriamente.##");
-    }catch(IvaInvalidoException | NoEnteroException | NoDecimalException | StockNegativoException e) {
+    }catch(IvaInvalidoException | StockNegativoException e) {
       System.err.println(e.getMessage()+" No ha sido posible agnadir el articulo.");
     }
 
@@ -131,14 +127,14 @@ public class TestAlmacen {
    * @throws AlmacenVacioException
    */
   public static void borrarArticulo() throws ArticuloNoExistenteException {
-    try {
+
       int code = Teclado.leerEntero("Introduzca el codigo del articulo a borrar:");
-      System.out.println(almacen.get(code));
-      almacen.borrarArticulo(code);
-      System.out.println("##Borrado finalizado##");
-    }catch(CodigoNoEncontradoException | NoEnteroException e) {
-      System.err.println(e.getMessage());
-    }
+      if(almacen.get(code) != null) {
+        almacen.borrarArticulo(code);
+        System.out.println("##Borrado finalizado##");
+      }else {
+        System.err.println("Ese articulo no existe.");
+      }
 
   }
 
@@ -159,7 +155,7 @@ public class TestAlmacen {
       almacen.modificar(almacen.get(code),Teclado.leerCadena("Descripcion:"), Teclado.leerDecimal("Precio de Compra:"), 
           Teclado.leerDecimal("Precio de Venta:"), Teclado.leerEntero("Stock"), elegirIva());
       System.out.println("##Modificado satisfactoriamente##");
-    }catch(CodigoNoEncontradoException | StockNegativoException |IvaInvalidoException | NoEnteroException | NoDecimalException e) {
+    }catch(StockNegativoException |IvaInvalidoException e) {
       System.err.println(e.getMessage());
     }
   }
@@ -178,7 +174,7 @@ public class TestAlmacen {
       almacen.entraMercancia(Teclado.leerEntero("Vamos a aumentar el stock, indique el codigo del articulo:"), 
           Teclado.leerEntero("Cuantas unidades entran?:"));
       System.out.println("##Stock aumentado##");
-    }catch(MercanciaNegativaException | NoEnteroException e){
+    }catch(MercanciaNegativaException e){
       System.err.println(e.getMessage());
     }
   }
@@ -197,7 +193,7 @@ public class TestAlmacen {
       almacen.saleMercancia(Teclado.leerEntero("Vamos a disminuir el stock, indique el codigo del articulo:"),
           Teclado.leerEntero("Cuantas unidades salen?:"));
       System.out.println("##Stock disminuido##");
-    }catch(MercanciaNegativaException | NoEnteroException e){
+    }catch(MercanciaNegativaException e){
       System.err.println(e.getMessage());
     }
   }
