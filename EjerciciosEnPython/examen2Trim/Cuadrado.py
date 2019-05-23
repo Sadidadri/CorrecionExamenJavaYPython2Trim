@@ -27,7 +27,6 @@ class Cuadrado(Rectangulo):
         return self.__lado
     @lado.setter
     def lado(self, l):
-        Cuadrado.__verifica_lado(l)
         self.alto = l 
         self.ancho = l
     
@@ -49,18 +48,7 @@ class Cuadrado(Rectangulo):
             raise Exception
         else:
             return (self.lado) == (other.lado)
-
-    """
-    Metodo estatico de la clase cuadrado, que comprueba que el lado se encuentre
-    entre 1 y 10 y que sea un entero. Si no es un entero lanzara un TypeError y si
-    no comprende los valores entre 1 y 10, lanzara un ArithmeticError.
-    """     
-    @staticmethod
-    def __verifica_lado(num):
-        if not isinstance(num, int):  # lado no entero
-            raise TypeError("Lado no entero", num)
-        if (num <= 0 or num >10):
-            raise ArithmeticError()    
+    
 """
 Main de la clase Cuadrado donde se llevan a cabo las pruebas.
 """
