@@ -44,19 +44,11 @@ public class Cuadrado extends Rectangulo implements Comparable<Cuadrado> {
 
   /**
    * Clase establecida para poder comparar 2 cuadrados, e indicar cual de ellos es
-   * mayor o si son iguales Devuelve 1 en caso de que la instancia sea mayor.
-   * Devuelve 0 si ambos cuadrados son iguales. Devuelve -1 si la instancia es
+   * mayor o si son iguales Devuelve un numero positivo en caso de que la instancia sea mayor.
+   * Devuelve 0 si ambos cuadrados son iguales. Devuelve un numero negativo si la instancia es
    * menor.
    */
   @Override
   public int compareTo(Cuadrado other) {
-    if (this.getLado() < other.getLado()) { // En caso de que la instancia sea menor al
-      return -1;                           // cuadrado pasado por parametro.
-    } else if (this.getLado() > other.getLado()) { // En caso de que la instancia sea mayor
-      return 1;                                    // al cuadrado pasado por parametro.
-    } else {   // En caso de que ambos cuadrados sean iguales.
-      return 0;
-    }
-  }
-
+    return this.getLado() - other.getLado();                          
 }
