@@ -87,4 +87,27 @@ public class Rectangulo{
     resultado += "\n";
     return resultado;
   }
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = 1;
+    result = prime * result + alto;
+    result = prime * result + ancho;
+    return result;
+  }
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (obj == null)
+      return false;
+    if (getClass() != obj.getClass())
+      return false;
+    Rectangulo other = (Rectangulo) obj;
+    if (alto != other.alto)
+      return false;
+    if (ancho != other.ancho)
+      return false;
+    return true;
+  }
 }
