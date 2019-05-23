@@ -24,7 +24,13 @@ public class Cuadrado extends Rectangulo implements Comparable<Cuadrado> {
   public Cuadrado() {
     super(5,5);
   }
-
+  /**
+  *Establece el valor del lado del cuadrado.
+  */
+  setLado(int l){
+    super().setAncho(l);
+    super().setAlto(l);
+  }
   /**
    * Devuelve el valor del lado que forma al cuadrado.
    * 
